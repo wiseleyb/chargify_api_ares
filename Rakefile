@@ -7,6 +7,7 @@ begin
     gemspec.email = "mklett@grasshopper.com"
     gemspec.homepage = "http://github.com/grasshopperlabs/chargify_api_ares"
     gemspec.authors = ["Michael Klett", "The Lab Rats @ Phase Two Labs"]
+    gemspec.add_dependency 'active_resource', '=2.3.5'
     Jeweler::GemcutterTasks.new
   end
 rescue LoadError

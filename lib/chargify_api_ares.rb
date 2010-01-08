@@ -17,33 +17,13 @@ end
 
 # Version check
 module Chargify
-  ARES_VERSIONS = ['2.3.4', '2.3.5']
+  ARES_VERSIONS = ['2.3.5']
 end
 require 'active_resource/version'
 unless Chargify::ARES_VERSIONS.include?(ActiveResource::VERSION::STRING)
   abort <<-ERROR
     ActiveResource version #{Chargify::ARES_VERSIONS.join(' or ')} is required.
   ERROR
-end
-
-# Patch ActiveResource version 2.3.4
-if ActiveResource::VERSION::STRING == '2.3.4'
-  module ActiveResource
-    class Base
-      def save
-        save_without_validation
-        true
-      rescue ResourceInvalid => error
-        case error.response['Content-Type']
-        when /application\/xml/
-          errors.from_xml(error.response.body)
-        when /application\/json/
-          errors.from_json(error.response.body)
-        end
-        false
-      end
-    end
-  end
 end
 
 
