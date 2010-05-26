@@ -33,14 +33,14 @@ This library can be installed as a gem.  It is hosted on [Rubygems](http://rubyg
 
 Then you can install this library as a gem:
 
-$ gem install chargify_api_ares
+    $ gem install chargify_api_ares
 
 
 ### Requirements
 
 This library requires at least ActiveResource version 2.3.4 (but has support for future releases, ie. Rails 3)
 
-$ gem install activeresource
+    $ gem install activeresource
 
 
 ### Usage
