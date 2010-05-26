@@ -17,7 +17,7 @@ end
 
 # Version check
 module Chargify
-  ARES_VERSIONS = ['2.3.4', '2.3.5','3.0.0.beta','3.0.0.beta2','3.0.0.beta3']
+  ARES_VERSIONS = ['2.3.4','2.3.5','2.3.8','3.0.0.beta','3.0.0.beta2','3.0.0.beta3']
 end
 
 require 'active_resource/version'

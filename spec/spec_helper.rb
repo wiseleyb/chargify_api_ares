@@ -1,10 +1,12 @@
 require 'rubygems'
-require 'spec'
+require 'bundler'
+
+Bundler.require(:default, :runtime, :test)
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 require 'chargify_api_ares'
-
+require 'spec'
 require 'fakeweb'
 require 'mocks/fake_resource'
 ActiveResource::Base.send :include, ActiveResource::FakeResource
