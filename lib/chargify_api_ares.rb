@@ -140,12 +140,33 @@ module Chargify
   end
     
   class Usage < Base
+    
+    def initialize(attributes = {})
+      component, subscription = attributes.delete(:component), attributes.delete(:subscription)
+      super
+      self.component, self.subscription = component, subscription
+      self.subscription_id = attributes.delete(:subscription_id) if attributes.has_key?(:subscription_id)
+      self.component_id = attributes.delete(:component_id) if attributes.has_key?(:component_id)
+    end
+    
     def subscription_id=(i)
       self.prefix_options[:subscription_id] = i
     end
+    
     def component_id=(i)
       self.prefix_options[:component_id] = i
-    end    
+    end
+    
+    def component=(c)
+      return nil unless c.is_a?(Chargify::Component)
+      self.component_id = c.id
+    end
+    
+    def subscription=(s)
+      return nil unless s.is_a?(Chargify::Subscription)
+      self.subscription_id = s.id 
+    end
+      
   end
   
   class Component < Base
