@@ -18,16 +18,42 @@ It allows you to interface with the Chargify API using simple ActiveRecord-like 
         :full_number => "1234-1234-1234-1234"
       }
     )
-    
+
     subscription.credit_card_attributes = {:expiration_year => 2013}
     subscription.save
-    
+
     subscription.cancel
 
 See the `samples` directory for more usage examples.
 
 
-### Installation
+### Installation  Rails 3
+
+Add this to your Gemfile
+
+    gem 'chargify_api_ares', :git => "git://github.com/wiseleyb/chargify_api_ares.git"
+
+Then do a:
+
+$ bundle install
+
+Then add this to your dev ,test, and production.rb; customizing it for each environment:
+
+    MyAppName::Application.configure do
+
+      # ... other config settings
+
+      # Chargify setup
+      # require 'chargify_api_ares'
+      Chargify.configure do |c|
+        c.subdomain = "mysubdomain"
+        c.api_key   = "api-key-from-charifies-api-access-tab"
+      end
+
+    end
+
+
+### Installation  Rails pre-3.0
 
 This library can be installed as a gem.  It is hosted on [Gemcutter](http://gemcutter.org).
 
@@ -56,17 +82,17 @@ $ gem install activeresource
 Simply require this library before you use it:
 
     require 'chargify_api_ares'
-    
+
 
 If you're using Rails, you could include this gem in your configuration, i.e. in `environment.rb`
 
     config.gem 'chargify_api_ares'
-    
+
 
 Now you'll have access to classes the interact with the Chargify API, such as:
 
-`Chargify::Product`  
-`Chargify::Customer`  
+`Chargify::Product`
+`Chargify::Customer`
 `Chargifiy::Subscription`
 
 Check out the examples in the `samples` directory.  If you're not familiar with how ActiveResource works,
