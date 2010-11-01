@@ -201,13 +201,13 @@ module Chargify
 
   class Coupon < Base
     def self.find_by_id(product_family_id, coupon_id)
-      Coupon.new get("/product_families/#{product_family_id}/coupons/#{coupon_id}.#{self.class.format.extension}") do |response|
+      Coupon.new get("/product_families/#{product_family_id}/coupons/#{coupon_id}.#{format.extension}") do |response|
         self.id = id_from_response(response)
         load_attributes_from_response(response)
       end
     end
     def self.find_by_code(product_family_id, coupon_code)
-      Coupon.new get("/product_families/#{product_family_id}/coupons/find.#{self.class.format.extension}?code=#{coupon_code}") do |response|
+      Coupon.new get("/product_families/#{product_family_id}/coupons/find.#{format.extension}?code=#{coupon_code}") do |response|
         self.id = id_from_response(response)
         load_attributes_from_response(response)
       end
