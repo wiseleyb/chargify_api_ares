@@ -216,5 +216,8 @@ module Chargify
 
   class PaymentProfile < Base
   end
+  
+  class Coupon < Base
+  end
 
 end
