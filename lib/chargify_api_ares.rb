@@ -204,11 +204,13 @@ module Chargify
       connection.get("/product_families/#{product_family_id}/coupons/#{coupon_id}.#{self.class.format.extension}") do |response|
         self.id = id_from_response(response)
         load_attributes_from_response(response)
+      end
     end
     def self.find_coupon_by_code(product_family_id, coupon_code)
       connection.get("/product_families/#{product_family_id}/coupons/find.#{self.class.format.extension}?code=#{coupon_code}") do |response|
         self.id = id_from_response(response)
         load_attributes_from_response(response)
+      end
     end
   end
     
