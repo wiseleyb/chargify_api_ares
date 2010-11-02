@@ -98,6 +98,7 @@ module Chargify
       PaymentProfile.find(:all, :params => params)
     end
     
+    # this is obviously pretty hard on chargify.  it'd be nice if they offered a count option in their api
     def self.count
       page = 1
       count = 0
