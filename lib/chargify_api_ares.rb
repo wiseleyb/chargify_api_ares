@@ -97,6 +97,18 @@ module Chargify
       params.merge!({:customer_id => self.id})
       PaymentProfile.find(:all, :params => params)
     end
+    
+    def self.count
+      page = 1
+      count = 0
+      begin
+        cnt = Chargify::Customer.find(:all, :params => {:page => page}).size
+        count += cnt
+        page += 1
+      end until cnt < 50
+      return count
+    end
+    
   end
 
   class Subscription < Base
@@ -199,24 +211,21 @@ module Chargify
     end
   end
 
-  class Coupon < Base
-    def self.find_by_id(product_family_id, coupon_id)
-      c = Coupon.new 
-      c.get("/product_families/#{product_family_id}/coupons/#{coupon_id}.json") do |response|
-        c.id = c.id_from_response(response)
-        c.load_attributes_from_response(response)
-      end
-      return c
-    end
-    def self.find_by_code(product_family_id, coupon_code)
-      c = Coupon.new 
-      c.connection.get("/product_families/#{product_family_id}/coupons/find.json?code=#{coupon_code}") do |response|
-        c.id = c.id_from_response(response)
-        c.load_attributes_from_response(response)
-      end
-      return c
-    end
-  end
+  # class Coupon < Base
+  #   def self.find_by_id(product_family_id, coupon_id)
+  #     Coupon.new get("/product_families/#{product_family_id}/coupons/#{coupon_id}.json") do |response|
+  #       self.id = id_from_response(response)
+  #       load_attributes_from_response(response)
+  #     end
+  #   end
+  #   def self.find_by_code(product_family_id, coupon_code)
+  #     Coupon.new get("/product_families/#{product_family_id}/coupons/find.json?code=#{coupon_code}") do |response|
+  #       id = id_from_response(response)
+  #       load_attributes_from_response(response)
+  #     end
+  #     return c
+  #   end
+  # end
     
   class Usage < Base
     def subscription_id=(i)
